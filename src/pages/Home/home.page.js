@@ -1,22 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './home.css';
+import { HomeContext } from '../../context';
+import Songs from '../../components/Songs';
 
-export default () => (
-	<div className="App">
-		<header className="App-header">
-			<img src={logo} className="App-logo" alt="logo" />
-			<p>
-				Hello ISong.
-          </p>
-			<a
-				className="App-link"
-				href="https://reactjs.org"
-				target="_blank"
-				rel="noopener noreferrer"
-			>
-				Learn React
-          </a>
-		</header>
-	</div>
-)
+export default class App extends Component {
+
+	constructor() {
+		super();
+		this.state = {
+			songs: [
+				{ id: 1, value: 'Fear of the Dark' },
+				{ id: 2, value: 'The Thooper' }
+			]
+		};
+	}
+
+	render() {
+		return (
+			<div className="app">
+				<HomeContext.Provider value={{ songs: this.state.songs }}>
+					<Songs></Songs>
+				</HomeContext.Provider>
+			</div>
+		);
+	}
+}
